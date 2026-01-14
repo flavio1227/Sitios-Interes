@@ -50,7 +50,6 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
             setImageLoaded(true);
           }}
           loading="lazy"
-          crossOrigin="anonymous"
         />
       )}
       
