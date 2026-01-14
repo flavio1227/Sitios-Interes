@@ -28,15 +28,30 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
     const checkImage = async () => {
       try {
         const response = await fetch(previewUrl, { method: 'HEAD' });
+        const contentType = response.headers.get('content-type');
+        
         console.log('Respuesta de API para', institution.name, ':', {
           status: response.status,
           statusText: response.statusText,
-          contentType: response.headers.get('content-type'),
-          ok: response.ok
+          contentType: contentType,
+          ok: response.ok,
+          previewUrl: previewUrl
         });
         
-        if (!response.ok || !response.headers.get('content-type')?.startsWith('image/')) {
+        // Si no es una imagen, intentar ver qué devuelve realmente
+        if (!response.ok || !contentType?.startsWith('image/')) {
           console.error('La API no devolvió una imagen válida para:', institution.name);
+          console.error('Status:', response.status, 'Content-Type:', contentType);
+          
+          // Intentar obtener el cuerpo de la respuesta para ver el error
+          try {
+            const textResponse = await fetch(previewUrl);
+            const text = await textResponse.text();
+            console.error('Respuesta de error de la API:', text.substring(0, 500));
+          } catch (e) {
+            console.error('No se pudo leer la respuesta de error');
+          }
+          
           setImageError(true);
         }
       } catch (error) {
