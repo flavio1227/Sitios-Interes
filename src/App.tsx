@@ -38,6 +38,12 @@ const institutions = [
 function App() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
+      <button
+        className="fixed top-4 left-4 z-50 bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
+      >
+        Menu
+      </button>
+
       <Header />
 
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
