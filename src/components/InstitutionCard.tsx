@@ -19,10 +19,18 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
       <img
         src={institution.icon}
         alt={`${institution.name} icon`}
-        className="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none"
+        className="absolute inset-0 w-full h-full object-contain opacity-10 pointer-events-none"
+        style={{ 
+          objectFit: 'contain',
+          padding: '20px',
+          opacity: 0.1
+        }}
         onError={(e) => {
-          // Si el SVG no existe, ocultarlo silenciosamente
+          console.error('Error cargando SVG:', institution.icon);
           e.currentTarget.style.display = 'none';
+        }}
+        onLoad={() => {
+          console.log('SVG cargado exitosamente:', institution.icon);
         }}
       />
       
