@@ -33,12 +33,16 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             console.error('Error cargando preview:', {
-              url: institution.url,
+              institutionName: institution.name,
+              originalUrl: institution.url,
               previewUrl: previewUrl,
               error: target.error,
               naturalWidth: target.naturalWidth,
-              naturalHeight: target.naturalHeight
+              naturalHeight: target.naturalHeight,
+              complete: target.complete,
+              src: target.src
             });
+            console.error('URL completa del preview:', previewUrl);
             setImageError(true);
           }}
           onLoad={() => {
