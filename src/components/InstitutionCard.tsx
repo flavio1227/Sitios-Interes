@@ -19,11 +19,12 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
       <img
         src={institution.icon}
         alt={`${institution.name} icon`}
-        className="absolute inset-0 w-full h-full object-contain opacity-10 pointer-events-none"
+        className="absolute inset-0 w-full h-full pointer-events-none"
         style={{ 
           objectFit: 'contain',
-          padding: '20px',
-          opacity: 0.1
+          padding: '40px',
+          opacity: 0.15,
+          zIndex: 0
         }}
         onError={(e) => {
           console.error('Error cargando SVG:', institution.icon);
@@ -35,7 +36,7 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
       />
       
       {/* Contenido del card */}
-      <div className="p-6 flex flex-col h-full relative z-10 bg-custom-blue/80 backdrop-blur-sm">
+      <div className="p-6 flex flex-col h-full relative z-10 bg-custom-blue/70">
         <div className="flex items-start justify-between mb-3">
           <h3 className="text-lg font-bold text-custom-yellow flex-1">
             {institution.name}
