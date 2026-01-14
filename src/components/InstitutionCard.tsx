@@ -1,4 +1,5 @@
 import { ExternalLink } from 'lucide-react';
+import { useState } from 'react';
 
 interface Institution {
   id: number;
@@ -12,15 +13,23 @@ interface InstitutionCardProps {
 }
 
 function InstitutionCard({ institution }: InstitutionCardProps) {
+  const [imageError, setImageError] = useState(false);
+  
+  // Generar URL de preview usando servicio gratuito image.thum.io
+  const previewUrl = `https://image.thum.io/get/width/600/crop/400/${institution.url}`;
+  
   return (
     <div className="bg-custom-blue rounded-lg border border-gray-200 shadow-sm hover:shadow transition-shadow duration-200 flex flex-col relative overflow-hidden" style={{ minHeight: '400px', maxHeight: '450px' }}>
-      {/* Iframe de fondo con opacidad */}
-      <iframe
-        src={institution.url}
-        className="absolute inset-0 w-full h-full opacity-10 pointer-events-none z-0"
-        style={{ transform: 'scale(0.5)', transformOrigin: 'top left', width: '200%', height: '200%' }}
-        title={`Preview de ${institution.name}`}
-      />
+      {/* Imagen de preview como fondo */}
+      {!imageError && (
+        <img
+          src={previewUrl}
+          alt={`Preview de ${institution.name}`}
+          className="absolute inset-0 w-full h-full object-cover opacity-10"
+          onError={() => setImageError(true)}
+          loading="lazy"
+        />
+      )}
       
       {/* Contenido del card con z-index para estar encima */}
       <div className="p-6 flex flex-col relative z-10 bg-custom-blue/80 backdrop-blur-sm h-full">
