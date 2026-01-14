@@ -1,6 +1,5 @@
 import Header from './components/Header';
 import InstitutionCard from './components/InstitutionCard';
-import ReturnButton from './components/ReturnButton';
 
 const institutions = [
   {
@@ -54,8 +53,6 @@ function App() {
           ))}
         </div>
       </main>
-
-      <ReturnButton />
     </div>
   );
 }
