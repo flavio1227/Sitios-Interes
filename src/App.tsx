@@ -40,7 +40,7 @@ function App() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <a
         href="https://flavio1227.github.io/SIGEM1.1/"
-        className="fixed top-4 left-4 z-50 bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 inline-block"
+        className="fixed top-4 left-4 z-50 bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 inline-block cursor-pointer"
       >
         SIGEM
       </a>
