@@ -47,7 +47,7 @@ function App() {
         <h1 className="text-2xl font-bold text-gray-900 mb-8 text-center">
           Red de Instituciones Vinculadas
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {institutions.map((institution) => (
             <InstitutionCard key={institution.id} institution={institution} />
           ))}
