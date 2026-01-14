@@ -15,8 +15,10 @@ interface InstitutionCardProps {
 function InstitutionCard({ institution }: InstitutionCardProps) {
   const [imageError, setImageError] = useState(false);
   
-  // Generar URL de preview usando servicio gratuito image.thum.io
-  const previewUrl = `https://image.thum.io/get/width/600/crop/400/${institution.url}`;
+  // Generar URL de preview usando múltiples servicios como fallback
+  // Usando servicio gratuito de screenshot.guru
+  const encodedUrl = encodeURIComponent(institution.url);
+  const previewUrl = `https://screenshot.guru/${encodedUrl}`;
   
   return (
     <div className="bg-custom-blue rounded-lg border border-gray-200 shadow-sm hover:shadow transition-shadow duration-200 flex flex-col relative overflow-hidden" style={{ minHeight: '400px', maxHeight: '450px' }}>
@@ -26,7 +28,13 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
           src={previewUrl}
           alt={`Preview de ${institution.name}`}
           className="absolute inset-0 w-full h-full object-cover opacity-10"
-          onError={() => setImageError(true)}
+          onError={(e) => {
+            console.log('Error cargando preview para:', institution.url);
+            setImageError(true);
+          }}
+          onLoad={() => {
+            console.log('Preview cargado exitosamente para:', institution.url);
+          }}
           loading="lazy"
         />
       )}
