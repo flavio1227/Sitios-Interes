@@ -1,5 +1,6 @@
 import { ExternalLink } from 'lucide-react';
 import { useState } from 'react';
+import React from 'react';
 
 interface Institution {
   id: number;
@@ -21,6 +22,31 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
   const encodedUrl = encodeURIComponent(institution.url);
   // URL correcta según documentación oficial: shot.screenshotapi.net
   const previewUrl = `https://shot.screenshotapi.net/screenshot?token=${API_KEY}&url=${encodedUrl}`;
+  
+  // Verificar la respuesta de la API antes de mostrar la imagen
+  React.useEffect(() => {
+    const checkImage = async () => {
+      try {
+        const response = await fetch(previewUrl, { method: 'HEAD' });
+        console.log('Respuesta de API para', institution.name, ':', {
+          status: response.status,
+          statusText: response.statusText,
+          contentType: response.headers.get('content-type'),
+          ok: response.ok
+        });
+        
+        if (!response.ok || !response.headers.get('content-type')?.startsWith('image/')) {
+          console.error('La API no devolvió una imagen válida para:', institution.name);
+          setImageError(true);
+        }
+      } catch (error) {
+        console.error('Error verificando preview para', institution.name, ':', error);
+        setImageError(true);
+      }
+    };
+    
+    checkImage();
+  }, [previewUrl, institution.name]);
   
   return (
     <div className="bg-custom-blue rounded-lg border border-gray-200 shadow-sm hover:shadow transition-shadow duration-200 flex flex-col relative overflow-hidden" style={{ minHeight: '400px', maxHeight: '450px' }}>
