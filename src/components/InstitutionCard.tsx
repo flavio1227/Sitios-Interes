@@ -16,11 +16,10 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   
-  // Generar URL de preview usando servicio gratuito
-  // Usando api.screenshotlayer.com con proxy CORS
+  // Generar URL de preview usando ScreenshotAPI.net con API key
+  const API_KEY = 'W0EGHQG-HY6MJRV-M7TA8GQ-PD5N05B';
   const encodedUrl = encodeURIComponent(institution.url);
-  // Usando servicio gratuito que funciona mejor: mini.s-shot.ru
-  const previewUrl = `https://mini.s-shot.ru/1024x768/PNG/1024/Z100/?${encodedUrl}`;
+  const previewUrl = `https://api.screenshotapi.net/screenshot?token=${API_KEY}&url=${encodedUrl}&width=600&height=400&format=png`;
   
   return (
     <div className="bg-custom-blue rounded-lg border border-gray-200 shadow-sm hover:shadow transition-shadow duration-200 flex flex-col relative overflow-hidden" style={{ minHeight: '400px', maxHeight: '450px' }}>
@@ -31,7 +30,7 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
           alt={`Preview de ${institution.name}`}
           className={`absolute inset-0 w-full h-full object-cover opacity-10 transition-opacity duration-300 ${imageLoaded ? 'opacity-10' : 'opacity-0'}`}
           onError={(e) => {
-            console.log('Error cargando preview para:', institution.url, previewUrl);
+            console.log('Error cargando preview para:', institution.url);
             setImageError(true);
           }}
           onLoad={() => {
@@ -39,7 +38,6 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
             setImageLoaded(true);
           }}
           loading="lazy"
-          referrerPolicy="no-referrer"
         />
       )}
       
