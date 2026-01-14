@@ -19,7 +19,8 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
   // Generar URL de preview usando ScreenshotAPI.net con API key
   const API_KEY = 'W0EGHQG-HY6MJRV-M7TA8GQ-PD5N05B';
   const encodedUrl = encodeURIComponent(institution.url);
-  const previewUrl = `https://api.screenshotapi.net/screenshot?token=${API_KEY}&url=${encodedUrl}&width=600&height=400&format=png`;
+  // URL correcta según documentación oficial: shot.screenshotapi.net
+  const previewUrl = `https://shot.screenshotapi.net/screenshot?token=${API_KEY}&url=${encodedUrl}`;
   
   return (
     <div className="bg-custom-blue rounded-lg border border-gray-200 shadow-sm hover:shadow transition-shadow duration-200 flex flex-col relative overflow-hidden" style={{ minHeight: '400px', maxHeight: '450px' }}>
