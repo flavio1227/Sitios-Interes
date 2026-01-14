@@ -5,6 +5,7 @@ interface Institution {
   name: string;
   description: string;
   url: string;
+  icon: string;
 }
 
 interface InstitutionCardProps {
@@ -13,9 +14,20 @@ interface InstitutionCardProps {
 
 function InstitutionCard({ institution }: InstitutionCardProps) {
   return (
-    <div className="bg-custom-blue rounded-lg border border-gray-200 shadow-sm hover:shadow transition-shadow duration-200 flex flex-col" style={{ minHeight: '400px', maxHeight: '450px' }}>
+    <div className="bg-custom-blue rounded-lg border border-gray-200 shadow-sm hover:shadow transition-shadow duration-200 flex flex-col relative overflow-hidden" style={{ minHeight: '400px', maxHeight: '450px' }}>
+      {/* SVG de fondo con opacidad */}
+      <img
+        src={institution.icon}
+        alt={`${institution.name} icon`}
+        className="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none"
+        onError={(e) => {
+          // Si el SVG no existe, ocultarlo silenciosamente
+          e.currentTarget.style.display = 'none';
+        }}
+      />
+      
       {/* Contenido del card */}
-      <div className="p-6 flex flex-col h-full">
+      <div className="p-6 flex flex-col h-full relative z-10 bg-custom-blue/80 backdrop-blur-sm">
         <div className="flex items-start justify-between mb-3">
           <h3 className="text-lg font-bold text-custom-yellow flex-1">
             {institution.name}
