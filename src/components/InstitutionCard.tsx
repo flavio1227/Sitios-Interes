@@ -31,14 +31,22 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
           alt={`Preview de ${institution.name}`}
           className={`absolute inset-0 w-full h-full object-cover opacity-10 transition-opacity duration-300 ${imageLoaded ? 'opacity-10' : 'opacity-0'}`}
           onError={(e) => {
-            console.log('Error cargando preview para:', institution.url);
+            const target = e.target as HTMLImageElement;
+            console.error('Error cargando preview:', {
+              url: institution.url,
+              previewUrl: previewUrl,
+              error: target.error,
+              naturalWidth: target.naturalWidth,
+              naturalHeight: target.naturalHeight
+            });
             setImageError(true);
           }}
           onLoad={() => {
-            console.log('Preview cargado exitosamente para:', institution.url);
+            console.log('Preview cargado exitosamente para:', institution.url, previewUrl);
             setImageLoaded(true);
           }}
           loading="lazy"
+          crossOrigin="anonymous"
         />
       )}
       
