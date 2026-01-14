@@ -63,3 +63,6 @@ El sitio estará disponible en: `https://flavio1227.github.io/Sitios-Interes/`
 ## 📄 Licencia
 
 Este proyecto es de código abierto.
+
+---
+*Última actualización: 2026*
