@@ -16,38 +16,38 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
   return (
     <div className="bg-custom-blue rounded-lg border border-gray-200 shadow-sm hover:shadow transition-shadow duration-200 flex flex-col relative overflow-hidden" style={{ minHeight: '400px', maxHeight: '450px' }}>
       {/* SVG de fondo con opacidad */}
-      <img
-        src={institution.icon}
-        alt={`${institution.name} icon`}
-        className="absolute pointer-events-none"
-        style={{ 
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '80%',
-          height: '80%',
-          objectFit: 'contain',
-          opacity: 0.2,
-          zIndex: 0
-        }}
-        onError={(e) => {
-          console.error('Error cargando SVG:', institution.icon, e);
-          e.currentTarget.style.display = 'none';
-        }}
-        onLoad={(e) => {
-          const target = e.target as HTMLImageElement;
-          console.log('SVG cargado exitosamente:', institution.icon, {
-            naturalWidth: target.naturalWidth,
-            naturalHeight: target.naturalHeight,
-            width: target.width,
-            height: target.height,
-            complete: target.complete
-          });
-        }}
-      />
+      <div 
+        className="absolute inset-0 flex items-center justify-center pointer-events-none"
+        style={{ zIndex: 0 }}
+      >
+        <img
+          src={institution.icon}
+          alt={`${institution.name} icon`}
+          className="w-3/4 h-3/4 object-contain"
+          style={{ 
+            opacity: 0.3,
+            maxWidth: '100%',
+            maxHeight: '100%'
+          }}
+          onError={(e) => {
+            console.error('Error cargando SVG:', institution.icon);
+            e.currentTarget.style.display = 'none';
+          }}
+          onLoad={(e) => {
+            const target = e.target as HTMLImageElement;
+            console.log('SVG cargado:', institution.name, {
+              naturalWidth: target.naturalWidth,
+              naturalHeight: target.naturalHeight,
+              display: window.getComputedStyle(target).display,
+              visibility: window.getComputedStyle(target).visibility,
+              opacity: window.getComputedStyle(target).opacity
+            });
+          }}
+        />
+      </div>
       
       {/* Contenido del card */}
-      <div className="p-6 flex flex-col h-full relative z-10 bg-custom-blue/70">
+      <div className="p-6 flex flex-col h-full relative z-10 bg-custom-blue/60">
         <div className="flex items-start justify-between mb-3">
           <h3 className="text-lg font-bold text-custom-yellow flex-1">
             {institution.name}
