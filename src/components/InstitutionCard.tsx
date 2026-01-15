@@ -47,7 +47,7 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
       </div>
       
       {/* Contenido del card */}
-      <div className="p-6 flex flex-col h-full relative z-10 bg-custom-blue/40">
+      <div className="p-6 flex flex-col h-full relative z-10 bg-custom-blue/20">
         <div className="flex items-start justify-between mb-3">
           <h3 className="text-lg font-bold text-custom-yellow flex-1">
             {institution.name}
