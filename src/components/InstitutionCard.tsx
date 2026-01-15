@@ -48,13 +48,10 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
       
       {/* Contenido del card */}
       <div className="p-6 flex flex-col h-full relative z-10 bg-custom-blue/20">
-        <div className="flex items-start justify-between mb-3">
-          <h3 className="text-lg font-bold text-custom-yellow flex-1">
+        <div className="mb-3">
+          <h3 className="text-lg font-bold text-custom-yellow text-center">
             {institution.name}
           </h3>
-          <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium text-gray-500 border border-gray-300 ml-2">
-            Sitio oficial
-          </span>
         </div>
 
         <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-4">
