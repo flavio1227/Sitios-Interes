@@ -19,19 +19,30 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
       <img
         src={institution.icon}
         alt={`${institution.name} icon`}
-        className="absolute inset-0 w-full h-full pointer-events-none"
+        className="absolute pointer-events-none"
         style={{ 
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '80%',
+          height: '80%',
           objectFit: 'contain',
-          padding: '40px',
-          opacity: 0.15,
+          opacity: 0.2,
           zIndex: 0
         }}
         onError={(e) => {
-          console.error('Error cargando SVG:', institution.icon);
+          console.error('Error cargando SVG:', institution.icon, e);
           e.currentTarget.style.display = 'none';
         }}
-        onLoad={() => {
-          console.log('SVG cargado exitosamente:', institution.icon);
+        onLoad={(e) => {
+          const target = e.target as HTMLImageElement;
+          console.log('SVG cargado exitosamente:', institution.icon, {
+            naturalWidth: target.naturalWidth,
+            naturalHeight: target.naturalHeight,
+            width: target.width,
+            height: target.height,
+            complete: target.complete
+          });
         }}
       />
       
