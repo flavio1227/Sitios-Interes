@@ -25,7 +25,7 @@ function InstitutionCard({ institution }: InstitutionCardProps) {
           alt={`${institution.name} icon`}
           className="w-3/4 h-3/4 object-contain"
           style={{ 
-            opacity: 0.3,
+            opacity: 0.5,
             maxWidth: '100%',
             maxHeight: '100%'
           }}
